@@ -1,10 +1,10 @@
-FROM openjdk:8-jdk-alpine
+FROM --platform=linux/arm64 openjdk:8-jdk-alpine
 # Add Maintainer Info
 LABEL description="IoT Processor"
 # Args for image
 ARG PORT=8080
 
-RUN apk update && apk upgrade && apk add --no-cache gcompat
+RUN apk update && apk upgrade #&& apk add --no-cache gcompat
 RUN ln -s /bin/bash /usr/bin
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
