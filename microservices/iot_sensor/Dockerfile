@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM --platform=linux/arm64 openjdk:8-jdk-alpine
 # Add Maintainer Info
 LABEL description="Simulate IoT Sensor"
 # Args for image
