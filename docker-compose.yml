@@ -205,7 +205,8 @@ services:
   # Web client for ZooNavigator, web-based browser & editor for ZooKeeper.
   # https://github.com/elkozmon/zoonavigator
   zoonavigator:
-    image: elkozmon/zoonavigator:latest
+    # image: elkozmon/zoonavigator:latest
+    image: zoonavigator
     container_name: zoonavigator
     restart: unless-stopped
     ports:
@@ -342,7 +343,8 @@ services:
  
   # # IoT Sensor 1
   iot_sensor_1:
-    image: ssanchez11/iot_sensor:0.0.1-SNAPSHOT
+    # image: ssanchez11/iot_sensor:0.0.1-SNAPSHOT
+    build: microservices/iot_sensor/.
     container_name: iot_sensor_1
     restart: unless-stopped
     environment:
@@ -379,7 +381,9 @@ services:
   #     - '8080:8080'
   iot-processor:
     # image: ssanchez11/iot_processor:0.0.1-SNAPSHOT
+    # platform: linux/amd64
     build: microservices/iot_processor/.
+    # image: iot_processor
     container_name: iot-processor
     restart: unless-stopped
     ports:
