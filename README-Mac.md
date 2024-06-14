@@ -159,3 +159,12 @@ user@client microservices/iot_processor $ docker run -it --rm --name my-maven-pr
 user@client microservices/iot_sensor $ docker run -it --rm --name my-maven-project -v "$(pwd)":/usr/src/mymaven -w /usr/src/mymaven arm64v8/maven:3.8-openjdk-8 mvn clean install
 ```
 
+## How to compile zoonavigator
+https://zoonavigator.elkozmon.com/en/latest/development.html
+
+```bash
+$ git clone https://github.com/elkozmon/zoonavigator.git
+$ cd zoonavigator
+$ docker build -t zoonavigator .
+
+```
