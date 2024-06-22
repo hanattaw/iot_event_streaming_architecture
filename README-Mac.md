@@ -168,3 +168,13 @@ $ cd zoonavigator
 $ docker build -t zoonavigator .
 
 ```
+
+
+
+# Copy and paste the following commands:
+
+docker stop $(docker ps -aq)
+docker container rm -f $(docker container ls -aq)
+docker volume rm -f $(docker volume ls -q)
+docker network rm -f $(docker network ls -q)
+docker image rm -f $(docker image ls -q)
