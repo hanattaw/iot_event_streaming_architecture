@@ -10,45 +10,45 @@ volumes:
 
 services:
 
-  zookeeper:
-    image: zookeeper:latest
-    container_name: zookeeper
-    platform: linux/arm64
-    restart: unless-stopped
-    volumes:
-      - zookeeper-data:/data
-      - zookeeper-log:/datalog
-    ports:
-      - 2181:2181
-    environment:
-      ZOO_MY_ID: 1
-      ZOO_AUTOPURGE_PURGEINTERVAL: 1
-      ZOO_AUTOPURGE_SNAPRETAINCOUNT: 3
-      ZOO_LOG4J_PROP: INFO,ROLLINGFILE
+  # zookeeper:
+  #   image: zookeeper:latest
+  #   container_name: zookeeper
+  #   platform: linux/arm64
+  #   restart: unless-stopped
+  #   volumes:
+  #     - zookeeper-data:/data
+  #     - zookeeper-log:/datalog
+  #   ports:
+  #     - 2181:2181
+  #   environment:
+  #     ZOO_MY_ID: 1
+  #     ZOO_AUTOPURGE_PURGEINTERVAL: 1
+  #     ZOO_AUTOPURGE_SNAPRETAINCOUNT: 3
+  #     ZOO_LOG4J_PROP: INFO,ROLLINGFILE
 
 
   # # ZooKeeper is a centralized service for maintaining configuration information,
   # # naming, providing distributed synchronization, and providing group services.
   # # It provides distributed coordination for our Kafka cluster.
   # # http://zookeeper.apache.org/
-  # zookeeper:
-  #   image: confluentinc/cp-zookeeper
-  #   container_name: zookeeper
-  #   # ZooKeeper is designed to "fail-fast", so it is important to allow it to
-  #   # restart automatically.
-  #   restart: unless-stopped
-  #   volumes:
-  #     - zookeeper-data:/var/lib/zookeeper/data
-  #     - zookeeper-log:/var/lib/zookeeper/log
-  #   environment:
-  #     ZOOKEEPER_CLIENT_PORT: 2181
-  #     ZOOKEEPER_LOG4J_ROOT_LOGLEVEL: INFO
-  #     ZOOKEEPER_LOG4J_PROP: INFO,ROLLINGFILE
-  #     ZOOKEEPER_LOG_MAXFILESIZE: 10MB
-  #     ZOOKEEPER_LOG_MAXBACKUPINDEX: 3
-  #     ZOOKEEPER_SNAP_COUNT: 3
-  #     ZOOKEEPER_AUTOPURGE_SNAP_RETAIN_COUNT: 3
-  #     ZOOKEEPER_AUTOPURGE_PURGE_INTERVAL: 1
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    container_name: zookeeper
+    # ZooKeeper is designed to "fail-fast", so it is important to allow it to
+    # restart automatically.
+    restart: unless-stopped
+    volumes:
+      - zookeeper-data:/var/lib/zookeeper/data
+      - zookeeper-log:/var/lib/zookeeper/log
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_LOG4J_ROOT_LOGLEVEL: INFO
+      ZOOKEEPER_LOG4J_PROP: INFO,ROLLINGFILE
+      ZOOKEEPER_LOG_MAXFILESIZE: 10MB
+      ZOOKEEPER_LOG_MAXBACKUPINDEX: 3
+      ZOOKEEPER_SNAP_COUNT: 3
+      ZOOKEEPER_AUTOPURGE_SNAP_RETAIN_COUNT: 3
+      ZOOKEEPER_AUTOPURGE_PURGE_INTERVAL: 1
 
 
   # Kafka is a distributed streaming platform. It is used to build real-time streaming
@@ -60,6 +60,8 @@ services:
     image: confluentinc/cp-kafka:latest
     platform: linux/arm64
     container_name: kafka
+    ports:
+      - '9092:9092'
     volumes:
       - kafka-data:/var/lib/kafka
     restart: unless-stopped
@@ -258,7 +260,7 @@ services:
       - ./mosquitto/log:/mosquitto/log
 
   mongo:
-    image: mongo
+    image: mongo:4.4.6
     container_name: mongo
     env_file:
       - .env
