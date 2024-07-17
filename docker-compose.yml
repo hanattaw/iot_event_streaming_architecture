@@ -110,6 +110,7 @@ services:
     container_name: kafka-topics-ui
     ports:
       - "8081:8000"
+    network_mode: bridge
     environment:
       # Required. Instructs the UI where it can find the Kafka REST Proxy.
       KAFKA_REST_PROXY_URL: "http://kafka-rest-proxy:8082/"
