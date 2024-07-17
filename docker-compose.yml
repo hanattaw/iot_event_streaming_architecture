@@ -215,6 +215,7 @@ services:
 
   # Web client for ZooNavigator, web-based browser & editor for ZooKeeper.
   # https://github.com/elkozmon/zoonavigator
+  # Navigate to zookeeper:2181 (see zookeeper service)
   zoonavigator:
     image: elkozmon/zoonavigator:latest
     container_name: zoonavigator
