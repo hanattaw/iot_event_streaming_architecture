@@ -58,7 +58,6 @@ services:
   kafka:
     # image: confluentinc/cp-kafka
     image: confluentinc/cp-kafka:latest
-    platform: linux/arm64
     container_name: kafka
     ports:
       - '9092:9092'
