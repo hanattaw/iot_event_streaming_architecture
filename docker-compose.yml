@@ -372,7 +372,8 @@ services:
   # # IoT Sensor 1
   iot_sensor_1:
     # image: ssanchez11/iot_sensor:0.0.1-SNAPSHOT
-    build: microservices/iot_sensor/.
+    build:
+      context: ./microservices/iot_sensor
     container_name: iot_sensor_1
     restart: unless-stopped
     environment:
@@ -410,7 +411,8 @@ services:
   iot-processor:
     # image: ssanchez11/iot_processor:0.0.1-SNAPSHOT
     # platform: linux/amd64
-    build: microservices/iot_processor/.
+    build: 
+      context: ./microservices/iot_processor
     # image: iot_processor
     container_name: iot-processor
     restart: unless-stopped
