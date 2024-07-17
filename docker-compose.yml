@@ -10,27 +10,10 @@ volumes:
 
 services:
 
-  # zookeeper:
-  #   image: zookeeper:latest
-  #   container_name: zookeeper
-  #   platform: linux/arm64
-  #   restart: unless-stopped
-  #   volumes:
-  #     - zookeeper-data:/data
-  #     - zookeeper-log:/datalog
-  #   ports:
-  #     - 2181:2181
-  #   environment:
-  #     ZOO_MY_ID: 1
-  #     ZOO_AUTOPURGE_PURGEINTERVAL: 1
-  #     ZOO_AUTOPURGE_SNAPRETAINCOUNT: 3
-  #     ZOO_LOG4J_PROP: INFO,ROLLINGFILE
-
-
-  # # ZooKeeper is a centralized service for maintaining configuration information,
-  # # naming, providing distributed synchronization, and providing group services.
-  # # It provides distributed coordination for our Kafka cluster.
-  # # http://zookeeper.apache.org/
+  # ZooKeeper is a centralized service for maintaining configuration information,
+  # naming, providing distributed synchronization, and providing group services.
+  # It provides distributed coordination for our Kafka cluster.
+  # http://zookeeper.apache.org/
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     container_name: zookeeper
