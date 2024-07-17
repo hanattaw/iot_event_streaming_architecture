@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker compose up kafka-exporter nodeexporter
+docker compose up kafka-exporter nodeexporter pushgateway

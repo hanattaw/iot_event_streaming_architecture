@@ -404,12 +404,13 @@ services:
     ports:
       - '8080:8080'
 
-  # pushgateway:
-  #   image: prom/pushgateway:v0.8.0
-  #   container_name: pushgateway
-  #   restart: unless-stopped
-  #   ports:
-  #     - '9091:9091'
+# The Prometheus Pushgateway exists to allow ephemeral and batch jobs to expose their metrics to Prometheus. Since these kinds of jobs may not exist long enough to be scraped, they can instead push their metrics to a Pushgateway. The Pushgateway then exposes these metrics to Prometheus.
+  pushgateway:
+    image: prom/pushgateway:v0.8.0
+    container_name: pushgateway
+    restart: unless-stopped
+    ports:
+      - '9091:9091'
 
   # Versatile, fast and lightweight web UI for managing Apache Kafka® clusters. Built by developers, for developers.
   # UI for Apache Kafka is a free, open-source web UI to monitor and manage Apache Kafka clusters.
