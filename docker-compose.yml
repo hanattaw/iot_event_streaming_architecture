@@ -117,26 +117,26 @@ services:
       - zookeeper
       - kafka
 
-  # # Browse Kafka topics and understand what's happening on your cluster.
-  # # Find topics / view topic metadata / browse topic data
-  # # (kafka messages) / view topic configuration / download data.
-  # # https://github.com/Landoop/kafka-topics-ui
-  # kafka-topics-ui:
-  #   image: landoop/kafka-topics-ui:latest
-  #   container_name: kafka-topics-ui
-  #   platform: linux/amd64
-  #   ports:
-  #     - "8081:8000"
-  #   environment:
-  #     # Required. Instructs the UI where it can find the Kafka REST Proxy.
-  #     KAFKA_REST_PROXY_URL: "http://kafka-rest-proxy:8082/"
-  #     # This instructs the docker image to use Caddy to proxy traffic to kafka-topics-ui.
-  #     PROXY: "true"
-  #   # kafka-topics-ui relies upon Kafka REST.
-  #   # This will instruct docker to wait until those services are up
-  #   # before attempting to start kafka-topics-ui.
-  #   depends_on:
-  #     - kafka-rest-proxy
+  # Browse Kafka topics and understand what's happening on your cluster.
+  # Find topics / view topic metadata / browse topic data
+  # (kafka messages) / view topic configuration / download data.
+  # https://github.com/Landoop/kafka-topics-ui
+  kafka-topics-ui:
+    image: landoop/kafka-topics-ui:latest
+    container_name: kafka-topics-ui
+    platform: linux/amd64
+    ports:
+      - "8081:8000"
+    environment:
+      # Required. Instructs the UI where it can find the Kafka REST Proxy.
+      KAFKA_REST_PROXY_URL: "http://kafka-rest-proxy:8082/"
+      # This instructs the docker image to use Caddy to proxy traffic to kafka-topics-ui.
+      PROXY: "true"
+    # kafka-topics-ui relies upon Kafka REST.
+    # This will instruct docker to wait until those services are up
+    # before attempting to start kafka-topics-ui.
+    depends_on:
+      - kafka-rest-proxy
 
   # Kafka Connect, an open source component of Apache Kafka,
   # is a framework for connecting Kafka with external systems
@@ -208,40 +208,40 @@ services:
       - zookeeper
       - kafka
 
-  # # This is a web tool for Kafka Connect for setting up and managing connectors for multiple connect clusters.
-  # # https://github.com/Landoop/kafka-connect-ui
-  # kafka-connect-ui:
-  #   image: landoop/kafka-connect-ui:latest
-  #   container_name: kafka-connect-ui
-  #   # kafka-connect-ui binds to port 8000, but we are going to expose it on our local
-  #   # machine on port 8002.
-  #   ports:
-  #     - "8082:8000"
-  #   environment:
-  #     # Required. Instructs the UI where it can find Kafka Connect.
-  #     CONNECT_URL: "http://kafka-connect:8083/"
-  #     # This instructs the docker image to use Caddy to proxy traffic to kafka-connect-ui.
-  #     PROXY: "true"
-  #   # kafka-connect-ui relies upon Kafka Connect.
-  #   # This will instruct docker to wait until those services are up
-  #   # before attempting to start kafka-connect-ui.
-  #   depends_on:
-  #     - kafka-connect
+  # This is a web tool for Kafka Connect for setting up and managing connectors for multiple connect clusters.
+  # https://github.com/Landoop/kafka-connect-ui
+  kafka-connect-ui:
+    image: landoop/kafka-connect-ui:latest
+    container_name: kafka-connect-ui
+    # kafka-connect-ui binds to port 8000, but we are going to expose it on our local
+    # machine on port 8002.
+    ports:
+      - "8082:8000"
+    environment:
+      # Required. Instructs the UI where it can find Kafka Connect.
+      CONNECT_URL: "http://kafka-connect:8083/"
+      # This instructs the docker image to use Caddy to proxy traffic to kafka-connect-ui.
+      PROXY: "true"
+    # kafka-connect-ui relies upon Kafka Connect.
+    # This will instruct docker to wait until those services are up
+    # before attempting to start kafka-connect-ui.
+    depends_on:
+      - kafka-connect
 
-  # # Web client for ZooNavigator, web-based browser & editor for ZooKeeper.
-  # # https://github.com/elkozmon/zoonavigator
-  # zoonavigator:
-  #   # image: elkozmon/zoonavigator:latest
-  #   image: zoonavigator
-  #   container_name: zoonavigator
-  #   restart: unless-stopped
-  #   ports:
-  #     - "9000:9000"
-  #   environment:
-  #     # The port on which the api service will listen for incoming connections.
-  #     HTTP_PORT: 9000
-  #   depends_on:
-  #     - zookeeper
+  # Web client for ZooNavigator, web-based browser & editor for ZooKeeper.
+  # https://github.com/elkozmon/zoonavigator
+  zoonavigator:
+    # image: elkozmon/zoonavigator:latest
+    image: zoonavigator
+    container_name: zoonavigator
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+    environment:
+      # The port on which the api service will listen for incoming connections.
+      HTTP_PORT: 9000
+    depends_on:
+      - zookeeper
 
   # Eclipse Mosquitto is an open source (EPL/EDL licensed) message broker that implements the MQTT protocol versions 5.0, 3.1.1 and 3.1. Mosquitto is lightweight and is suitable for use on all devices from low power single board computers to full servers.
   # The MQTT protocol provides a lightweight method of carrying out messaging using a publish/subscribe model. This makes it suitable for Internet of Things messaging such as with low power sensors or mobile devices such as phones, embedded computers or microcontrollers.
@@ -270,26 +270,26 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
       - MONGO_INITDB_DATABASE=${MONGO_DB}
 
-  # # Web-based MongoDB admin interface, written with Node.js and express
-  # mongo-express:
-  #   image: mongo-express
-  #   container_name: mongo-express
-  #   env_file:
-  #     - .env
-  #   restart: unless-stopped
-  #   environment:
-  #     - ME_CONFIG_MONGODB_SERVER=mongo
-  #     - ME_CONFIG_MONGODB_PORT=27017
-  #     - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
-  #     - ME_CONFIG_MONGODB_AUTH_DATABASE=admin
-  #     - ME_CONFIG_MONGODB_ADMINUSERNAME=${MONGO_ROOT_USER}
-  #     - ME_CONFIG_MONGODB_ADMINPASSWORD=${MONGO_ROOT_PASSWORD}
-  #     - ME_CONFIG_BASICAUTH_USERNAME=${MONGOEXPRESS_LOGIN}
-  #     - ME_CONFIG_BASICAUTH_PASSWORD=${MONGOEXPRESS_PASSWORD}
-  #   depends_on:
-  #     - mongo
-  #   ports:
-  #     - "8084:8081"
+  # Web-based MongoDB admin interface, written with Node.js and express
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    env_file:
+      - .env
+    restart: unless-stopped
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+      - ME_CONFIG_MONGODB_AUTH_DATABASE=admin
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=${MONGO_ROOT_USER}
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=${MONGO_ROOT_PASSWORD}
+      - ME_CONFIG_BASICAUTH_USERNAME=${MONGOEXPRESS_LOGIN}
+      - ME_CONFIG_BASICAUTH_PASSWORD=${MONGOEXPRESS_PASSWORD}
+    depends_on:
+      - mongo
+    ports:
+      - "8084:8081"
       
   
   # Grafana is a multi-platform open source analytics and interactive visualization web application. 
@@ -339,34 +339,34 @@ services:
     # depends_on:
     #   - nodeexporter
       
-  # # Exporter for machine metrics    
-  # nodeexporter:
-  #   image: prom/node-exporter:v0.18.1
-  #   container_name: nodeexporter
-  #   hostname: nodeexporter
-  #   volumes:
-  #     - /proc:/host/proc:ro
-  #     - /sys:/host/sys:ro
-  #   command:
-  #     - '--path.procfs=/host/proc'
-  #     - '--path.rootfs=/rootfs'
-  #     - '--path.sysfs=/host/sys'
-  #     - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
-  #   restart: unless-stopped
-  #   ports:
-  #     - '9100:9100'
+  # Exporter for machine metrics    
+  nodeexporter:
+    image: prom/node-exporter:v0.18.1
+    container_name: nodeexporter
+    hostname: nodeexporter
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
+    restart: unless-stopped
+    ports:
+      - '9100:9100'
 
-  # # Kafka exporter for Prometheus
-  # kafka-exporter:
-  #   image: bitnami/kafka-exporter:latest
-  #   container_name: kafka-exporter
-  #   hostname: kafka-exporter
-  #   command:
-  #     - '--kafka.server=kafka:9092'
-  #     - '--web.listen-address=kafka-exporter:9308'
-  #     - '--web.telemetry-path=/metrics'
-  #     - '--log.level=debug'
-  #   restart: unless-stopped
+  # Kafka exporter for Prometheus
+  kafka-exporter:
+    image: bitnami/kafka-exporter:latest
+    container_name: kafka-exporter
+    hostname: kafka-exporter
+    command:
+      - '--kafka.server=kafka:9092'
+      - '--web.listen-address=kafka-exporter:9308'
+      - '--web.telemetry-path=/metrics'
+      - '--log.level=debug'
+    restart: unless-stopped
 
  
   # # IoT Sensor 1
