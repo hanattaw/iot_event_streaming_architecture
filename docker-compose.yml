@@ -99,28 +99,28 @@ services:
       - zookeeper
       - kafka
 
-  # Browse Kafka topics and understand what's happening on your cluster.
-  # Find topics / view topic metadata / browse topic data
-  # (kafka messages) / view topic configuration / download data.
-  # https://github.com/Landoop/kafka-topics-ui
-  # deprecated becase of https://github.com/lensesio/kafka-topics-ui/issues/174
+  # # Browse Kafka topics and understand what's happening on your cluster.
+  # # Find topics / view topic metadata / browse topic data
+  # # (kafka messages) / view topic configuration / download data.
+  # # https://github.com/Landoop/kafka-topics-ui
+  # # deprecated becase of https://github.com/lensesio/kafka-topics-ui/issues/174
 
-  kafka-topics-ui:
-    image: landoop/kafka-topics-ui:latest
-    container_name: kafka-topics-ui
-    ports:
-      - "8081:8000"
-    network_mode: bridge
-    environment:
-      # Required. Instructs the UI where it can find the Kafka REST Proxy.
-      KAFKA_REST_PROXY_URL: "http://kafka-rest-proxy:8082/"
-      # This instructs the docker image to use Caddy to proxy traffic to kafka-topics-ui.
-      PROXY: "true"
-    # kafka-topics-ui relies upon Kafka REST.
-    # This will instruct docker to wait until those services are up
-    # before attempting to start kafka-topics-ui.
-    depends_on:
-      - kafka-rest-proxy
+  # kafka-topics-ui:
+  #   image: landoop/kafka-topics-ui:latest
+  #   container_name: kafka-topics-ui
+  #   ports:
+  #     - "8081:8000"
+  #   network_mode: bridge
+  #   environment:
+  #     # Required. Instructs the UI where it can find the Kafka REST Proxy.
+  #     KAFKA_REST_PROXY_URL: "http://kafka-rest-proxy:8082/"
+  #     # This instructs the docker image to use Caddy to proxy traffic to kafka-topics-ui.
+  #     PROXY: "true"
+  #   # kafka-topics-ui relies upon Kafka REST.
+  #   # This will instruct docker to wait until those services are up
+  #   # before attempting to start kafka-topics-ui.
+  #   depends_on:
+  #     - kafka-rest-proxy
 
   # Kafka Connect, an open source component of Apache Kafka,
   # is a framework for connecting Kafka with external systems
@@ -192,26 +192,26 @@ services:
       - zookeeper
       - kafka
 
-  # This is a web tool for Kafka Connect for setting up and managing connectors for multiple connect clusters.
-  # https://github.com/Landoop/kafka-connect-ui
-  kafka-connect-ui:
-    image: landoop/kafka-connect-ui:latest
-    container_name: kafka-connect-ui
-    # kafka-connect-ui binds to port 8000, but we are going to expose it on our local
-    # machine on port 8002.
-    ports:
-      - "8082:8000"
-    network_mode: bridge
-    environment:
-      # Required. Instructs the UI where it can find Kafka Connect.
-      CONNECT_URL: "http://kafka-connect:8083/"
-      # This instructs the docker image to use Caddy to proxy traffic to kafka-connect-ui.
-      PROXY: "true"
-    # kafka-connect-ui relies upon Kafka Connect.
-    # This will instruct docker to wait until those services are up
-    # before attempting to start kafka-connect-ui.
-    depends_on:
-      - kafka-connect
+  # # This is a web tool for Kafka Connect for setting up and managing connectors for multiple connect clusters.
+  # # https://github.com/Landoop/kafka-connect-ui
+  # kafka-connect-ui:
+  #   image: landoop/kafka-connect-ui:latest
+  #   container_name: kafka-connect-ui
+  #   # kafka-connect-ui binds to port 8000, but we are going to expose it on our local
+  #   # machine on port 8002.
+  #   ports:
+  #     - "8082:8000"
+  #   network_mode: bridge
+  #   environment:
+  #     # Required. Instructs the UI where it can find Kafka Connect.
+  #     CONNECT_URL: "http://kafka-connect:8083/"
+  #     # This instructs the docker image to use Caddy to proxy traffic to kafka-connect-ui.
+  #     PROXY: "true"
+  #   # kafka-connect-ui relies upon Kafka Connect.
+  #   # This will instruct docker to wait until those services are up
+  #   # before attempting to start kafka-connect-ui.
+  #   depends_on:
+  #     - kafka-connect
 
   # Web client for ZooNavigator, web-based browser & editor for ZooKeeper.
   # https://github.com/elkozmon/zoonavigator
@@ -411,17 +411,23 @@ services:
   #   ports:
   #     - '9091:9091'
 
-  # kafka-ui:
-  #   container_name: kafka-ui
-  #   image: provectuslabs/kafka-ui:latest
-  #   ports:
-  #     - 18080:8080
-  #   depends_on:
-  #     - kafka
-  #   environment:
-  #     DYNAMIC_CONFIG_ENABLED: 'true'
-  #     KAFKA_CLUSTERS_0_NAME: wizard_test
-  #     KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+  # Versatile, fast and lightweight web UI for managing Apache Kafka® clusters. Built by developers, for developers.
+  # UI for Apache Kafka is a free, open-source web UI to monitor and manage Apache Kafka clusters.
+  # UI for Apache Kafka is a simple tool that makes your data flows observable, helps find and troubleshoot issues faster and deliver optimal performance. Its lightweight dashboard makes it easy to track key metrics of your Kafka clusters - Brokers, Topics, Partitions, Production, and Consumption.
+  # https://github.com/provectus/kafka-ui
+
+  kafka-ui:
+    container_name: kafka-ui
+    image: provectuslabs/kafka-ui:latest
+    ports:
+      - 18080:8080
+    depends_on:
+      - kafka
+    environment:
+      DYNAMIC_CONFIG_ENABLED: 'true'
+      KAFKA_CLUSTERS_0_NAME: wizard_test
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+
       
       
       
