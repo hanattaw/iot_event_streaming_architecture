@@ -200,6 +200,7 @@ services:
     # machine on port 8002.
     ports:
       - "8082:8000"
+    network_mode: bridge
     environment:
       # Required. Instructs the UI where it can find Kafka Connect.
       CONNECT_URL: "http://kafka-connect:8083/"
