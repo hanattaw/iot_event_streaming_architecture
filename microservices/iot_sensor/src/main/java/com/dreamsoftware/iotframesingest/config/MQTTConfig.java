@@ -22,11 +22,14 @@ public class MQTTConfig {
      * @return
      */
     @Bean
-    public MqttConnectOptions provideMqttConnectOptions() {
+    public MqttConnectOptions provideMqttConnectOptions(@Value("${sensor.mqtt.username}") String mqttUsername,
+    @Value("${sensor.mqtt.password}") String mqttPassword) {
         MqttConnectOptions options = new MqttConnectOptions();
         options.setAutomaticReconnect(true);
         options.setCleanSession(true);
         options.setConnectionTimeout(10);
+        options.setUserName(mqttUsername);
+        options.setPassword(mqttPassword.toCharArray());
         return options;
     }
 

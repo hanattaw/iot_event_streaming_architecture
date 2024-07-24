@@ -367,6 +367,8 @@ services:
       - sensor.id=${IOT_SENSOR_1_ID}
       - sensor.name=${IOT_SENSOR_1_NAME}
       - sensor.place.id=${IOT_SENSOR_1_PLACE_ID}
+      - sensor.mqtt.username=${IOT_SENSOR_1_USERNAME}
+      - sensor.mqtt.password=${IOT_SENSOR_1_PASSWORD}
 
   # # # # IoT Sensor 2
   # iot_sensor_2:
