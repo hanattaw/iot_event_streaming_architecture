@@ -3,7 +3,8 @@ FROM openjdk:8-jdk-alpine
 LABEL description="Simulate IoT Sensor"
 # Args for image
 ARG PORT=8080
-
+ARG MQTT_SERVER=mosquitto
+ENV MQTT_SERVER ${MQTT_SERVER}
 RUN apk update && apk upgrade
 RUN ln -s /bin/bash /usr/bin
 RUN mkdir -p /usr/src/app
@@ -21,4 +22,4 @@ RUN ls -al
 
 EXPOSE ${PORT}
 
-CMD ["sh", "-c", "echo 'waiting for 300 seconds for mosquitto:1883 to be accessable before starting application' && ./wait-for-it.sh -t 300 mosquitto:1883 -- java -jar app.jar"]
+CMD ["sh", "-c", "echo \"waiting for 300 seconds for ${MQTT_SERVER}:1883 to be accessable before starting application\" && ./wait-for-it.sh -t 300 ${MQTT_SERVER}:1883 -- java -jar app.jar"]

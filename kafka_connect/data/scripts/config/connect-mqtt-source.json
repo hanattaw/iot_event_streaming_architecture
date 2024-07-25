@@ -5,6 +5,8 @@
         "tasks.max": 1,
         "mqtt.server.uri": "tcp://mosquitto:1883",
         "mqtt.topics": "iot-frames",
+        "mqtt.username": "kafka-connect",
+        "mqtt.password": "kafka-connect",
         "mqtt.qos": 1,
         "kafka.topic": "iot-frames",
         "value.converter": "org.apache.kafka.connect.converters.ByteArrayConverter",

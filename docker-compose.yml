@@ -361,6 +361,8 @@ services:
     # image: ssanchez11/iot_sensor:0.0.1-SNAPSHOT
     build:
       context: ./microservices/iot_sensor
+      args:
+        - MQTT_SERVER=${MQTT_SERVER}
     container_name: iot_sensor_1
     restart: unless-stopped
     environment:
@@ -369,6 +371,7 @@ services:
       - sensor.place.id=${IOT_SENSOR_1_PLACE_ID}
       - sensor.mqtt.username=${IOT_SENSOR_1_USERNAME}
       - sensor.mqtt.password=${IOT_SENSOR_1_PASSWORD}
+      - MQTT_SERVER=${MQTT_SERVER}
 
   # # # # IoT Sensor 2
   # iot_sensor_2:
@@ -402,6 +405,8 @@ services:
     # platform: linux/amd64
     build: 
       context: ./microservices/iot_processor
+      args:
+        - MQTT_SERVER=mosquitto
     # image: iot_processor
     container_name: iot-processor
     restart: unless-stopped
