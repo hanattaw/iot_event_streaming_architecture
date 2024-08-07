@@ -149,12 +149,12 @@ To start the platform make sure you have Ruby installed, go to the root director
 
 
 
-## How to compile iot_processor for mac
+## How to compile iot_processor for Ubuntu22.04
 ```bash
 user@client microservices/iot_processor $ docker run -it --rm --name my-maven-project -v "$(pwd)":/usr/src/mymaven -w /usr/src/mymaven maven:3.8-openjdk-11 mvn clean install
 ```
 
-## How to compile iot_sensor for mac
+## How to compile iot_sensor for Ubuntu22.04
 ```bash
 user@client microservices/iot_sensor $ docker run -it --rm --name my-maven-project -v "$(pwd)":/usr/src/mymaven -w /usr/src/mymaven maven:3.8-openjdk-8 mvn clean install
 ```
