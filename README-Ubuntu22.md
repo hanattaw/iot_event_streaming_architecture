@@ -151,11 +151,13 @@ To start the platform make sure you have Ruby installed, go to the root director
 
 Please check out then follow the instructions.
 1. open 5 terminals
-2. Modify .env by contents in .env-dev
+1. Modify .env by contents in .env-dev
 1. 1st Terminal run start_0zookeeper_kafka.sh
 1. 2nd Terminal run start_1kafka_service.sh
 1. 3rd Terminal run start_2iot_processor.sh
+   - You need to make the jar file of iot-processor (please see 'How to compile iot_processor for Ubuntu22.04') 
 1. 4th Terminal run start_3iot_sensor.sh
+   - You need to compile iot-sensor for Ubuntu22.04 (please see 'How to compile iot_sensor for Ubuntu22.04')
 1. 5th Terminal run docker compose logs -f mosquitto
 
 ## View each screen short
