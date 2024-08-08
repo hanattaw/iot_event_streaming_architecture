@@ -147,6 +147,22 @@ To start the platform make sure you have Ruby installed, go to the root director
   </a>
 
 
+# Ubuntu 22.04 Iot sensor project
+
+Please check out then follow the instructions.
+1. open 5 terminals
+2. Modify .env by contents in .env-dev
+1. 1st Terminal run start_0zookeeper_kafka.sh
+1. 2nd Terminal run start_1kafka_service.sh
+1. 3rd Terminal run start_2iot_processor.sh
+1. 4th Terminal run start_3iot_sensor.sh
+1. 5th Terminal run docker compose logs -f mosquitto
+
+## View each screen short
+<img width="auto" src="./screenshots/5-terminal.png" />
+<img width="auto" src="./screenshots/4-sensor.png" />
+<img width="auto" src="./screenshots/stadium.png" />
+<img width="auto" src="./screenshots/park-map.png" />
 
 
 ## How to compile iot_processor for Ubuntu22.04
@@ -168,8 +184,6 @@ $ cd zoonavigator
 $ docker build -t zoonavigator .
 
 ```
-
-
 
 # Copy and paste the following commands:
 
