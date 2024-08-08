@@ -39,4 +39,3 @@ build/
 mosquitto/log
 mosquitto/data
 
-grafana/data
